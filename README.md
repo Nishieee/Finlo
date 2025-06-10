@@ -1,13 +1,49 @@
-# Financial-Ledger
+# 💰 Finlo: The Financial Ledger API
 
+> **An AI-powered financial API for small businesses. Forecasts cash flow, generates SQL from plain English, and delivers insights like a virtual CFO.**
 
+---
 
+## 🌟 Inspiration
 
-Complete business intelligence API with AI SQL generation and Prophet-based forecasting.
+Small business owners constantly juggle receipts, spreadsheets, and overpriced accountants — all to answer one question:
+**“Can I make payroll this month?”**
+
+Finlo was built to make that question obsolete. It’s a calming “flow” for SMBs — a single AI brain that watches cash 24/7 and whispers what to do next.
+
+---
+
+## 🧠 What It Does
+
+Finlo acts as an AI CFO + finance operating system.
+
+You can say something like:
+
+> *“Paid rent \$2,000”*
+
+Finlo will:
+
+* 🧾 **Convert it to SQL** and post it correctly to Supabase
+* 🚨 **Flag trends or anomalies** (e.g., spike in ad spend)
+* 📈 **Forecast your cash flow** 30–90 days ahead using Prophet
+* 🧠 **Return insights** like “profit margin trending ↓ 8%”
+
+---
+
+## 🔧 Under the Hood
+
+* **FastAPI**: Backend that serves REST endpoints
+* **Groq LLaMA 3**: Converts natural language into SQL
+* **Supabase**: Acts as the financial ledger (PostgreSQL backend)
+* **Prophet**: Performs forecasting with monthly/seasonal logic and error bars
+* **No ORM**: All database operations use raw SQL for performance
+
+---
 
 ## 🚀 Quick Start
 
 ### 1. Python Environment
+
 ```bash
 # Create virtual environment
 python -m venv env
@@ -23,82 +59,85 @@ pip install -r requirements.txt
 ```
 
 ### 2. Environment Variables
-Create `.env` file:
+
+Create a `.env` file in the root directory with the following content:
+
 ```env
 SUPABASE_URL=your_supabase_url
 SUPABASE_ANON_KEY=your_supabase_key
 GROQ_API_KEY=your_groq_api_key
 ```
 
-### 3. Database Setup
-Create table in Supabase SQL Editor:
-```sql
-CREATE TABLE daily_expenses (
-    id SERIAL PRIMARY KEY,
-    date DATE NOT NULL,
-    amount DECIMAL(10,2) NOT NULL,
-    description VARCHAR(255) NOT NULL,
-    category VARCHAR(50) NOT NULL,
-    payment_method VARCHAR(20) NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
+### 3. Run the Server
 
-### 4. Run Server
 ```bash
 # Method 1: Direct Python
 python main.py
 
-# Method 2: Uvicorn command
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-
-# Method 3: Development with auto-reload
+# Method 2: Uvicorn (recommended for development)
 uvicorn main:app --reload
 ```
 
-**API Available:** `http://localhost:8000`  
-**Docs Available:** `http://localhost:8000/docs`
+### 4. Use the API
 
-## 📖 API Endpoints
+Access the interactive API docs at:
 
-### SQL Generation
-- `POST /generate-sql` - Convert natural language to SQL
-- `GET /examples` - See example inputs
+📘 `http://localhost:8000/docs`
 
-### Forecasting
-- `GET /forecast/comprehensive/30` - Full 30-day business forecast
-- `GET /forecast/revenue/7` - 7-day revenue forecast
-- `GET /metrics/current` - Current business metrics
+---
 
-### Documentation
-- `GET /docs` - Interactive API documentation
+## 💡 Example Usage
 
-## 💡 Usage Examples
+### Add an Expense via SQL Generator
 
-**Add Expense:**
 ```bash
 curl -X POST "http://localhost:8000/generate-sql" \
   -H "Content-Type: application/json" \
   -d '{"input_text": "bought coffee beans for $150"}'
 ```
 
-**Get Forecast:**
+### Get a 30-Day Forecast
+
 ```bash
 curl "http://localhost:8000/forecast/comprehensive/30"
 ```
 
-**Generate Test Data:**
-```python
-python business_forecasting.py  # Run with generate_dummy=True
-```
+---
 
 ## 🔧 Cash Flow Rules
-- **Expenses** (outgoing): Negative amounts (-50.00)
-- **Revenue** (incoming): Positive amounts (500.00)
 
-## 📁 Project Structure
-- `main.py` - FastAPI server & endpoints
-- `business_forecasting.py` - Prophet forecasting logic
-- `forecast_validation.py` - Model validation & backtesting
+* **Expenses (outgoing):** Use negative values → `-50.00`
+* **Revenue (incoming):** Use positive values → `500.00`
 
-Visit `http://localhost:8000/docs` for full API documentation.
+---
+
+## ✅ Accomplishments
+
+* ⏱️ End-to-end flow: voice → SQL → forecast in under 30 seconds
+* 📉 Forecast error (MAPE) under 15% in back-tests
+* 🛠️ Zero-config setup: just plug in Supabase keys and go
+
+---
+
+## 📘 What We Learned
+
+* Transparency builds trust — forecasts need error bars
+* SMBs want clear, actionable **sentences**, not just charts
+* Audio and API robustness requires defensive design (timeouts, fallbacks, logging)
+
+---
+
+## 🔮 What’s Next for Finlo
+
+* 📱 Mobile PWA + browser extension for auto-importing receipts
+* 🔔 Rules engine: alerts when runway < 3 weeks
+* 📦 One-click tax prep: CSV exports or integration with e-filing services
+* 🔐 SOC 2 + PCI compliance for scaling to fintech partners
+
+---
+
+## 📎 Links
+
+* 🔗 [Video](https://youtu.be/ndShkzxVM5A)
+* 🔗 [Devpost submission](https://devpost.com/software/finlo-finance-flow)
+
