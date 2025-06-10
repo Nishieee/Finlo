@@ -2,8 +2,6 @@
 
 > **An AI-powered financial API for small businesses. Forecasts cash flow, generates SQL from plain English, and delivers insights like a virtual CFO.**
 
----
-
 ## 🌟 Inspiration
 
 Small business owners constantly juggle receipts, spreadsheets, and overpriced accountants — all to answer one question:
@@ -33,7 +31,7 @@ Finlo will:
 ## 🔧 Under the Hood
 
 * **FastAPI**: Backend that serves REST endpoints
-* **Groq LLaMA 3**: Converts natural language into SQL
+* **OpenAI API**: Converts natural language into SQL
 * **Supabase**: Acts as the financial ledger (PostgreSQL backend)
 * **Prophet**: Performs forecasting with monthly/seasonal logic and error bars
 * **No ORM**: All database operations use raw SQL for performance
