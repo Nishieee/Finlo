@@ -1,6 +1,6 @@
 # 💰 Finlo: The Financial Ledger API
 
-> **An AI-powered financial API for small businesses. Forecasts cash flow, generates SQL from plain English, and delivers insights like a virtual CFO.**
+**An AI-powered financial API for small businesses. Forecasts cash flow, generates SQL from plain English, and delivers insights like a virtual CFO.**
 
 ## 🌟 Inspiration
 
